@@ -42,6 +42,8 @@ Este projeto contém testes automatizados desenvolvidos para a **Dog CEO API**, 
   - Contém todos os cenários de teste desenvolvidos.
 - **Environment**: `DogAPI Environment.postman_environment.json`
   - Contém variáveis globais, como `base_url`.
+- **Exercicio2**:
+  - Contém as perguntas e as respostas do segundo exercício.
 
 ---
 
