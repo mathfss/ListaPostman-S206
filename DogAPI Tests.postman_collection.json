@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "e0f09124-046a-4fe1-b002-bb7ad64ba63e",
+		"name": "DogAPI Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39344190"
+	},
+	"item": [
+		{
+			"name": "Obter Lista de Raças",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body contains breeds list\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.message).to.be.an(\"object\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/breeds/list/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"breeds",
+						"list",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Imagem Aleatória de Raça",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response contains image URL\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.message).to.be.a(\"string\");\r",
+							"    pm.expect(response.message).to.include(\"https://\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/breed/bulldog/images/random",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"breed",
+						"bulldog",
+						"images",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Raça Inválida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Error message is present\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.status).to.eql(\"error\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/breed/invalidbreed/images/random",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"breed",
+						"invalidbreed",
+						"images",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sub-Raças de Bulldog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Sub-breeds list is valid\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.message).to.be.an(\"array\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/breed/bulldog/list",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"breed",
+						"bulldog",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Endpoint Inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/nonexistent-endpoint",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nonexistent-endpoint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Múltiplas Imagens Aleatórias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response contains 3 images\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.message).to.be.an(\"array\");\r",
+							"    pm.expect(response.message.length).to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/breeds/image/random/3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"breeds",
+						"image",
+						"random",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
